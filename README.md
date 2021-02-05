@@ -51,8 +51,9 @@
 ## Step 1. helm repository 생성
 - 목적 : `helm repository 생성`
 - 생성 순서 : 아래 command로 yaml 적용
-    - kubectl apply -f chartmuseum.yaml -n {YOUR_NAMESPACE} ([파일](./manifest/chartmuseum.yaml))
-- 비고 : YOUR_NAMESPACE에는 사용자가 생성하고자 하는 네임스페이스를 지정해야 합니다.
+    - kubectl create namespace helmrepo
+    - kubectl apply -f chartmuseum.yaml ([파일](./manifest/chartmuseum.yaml))
+- 비고 : 설치 namespace는 helmrepo 라고 가정 합니다.
 - 비고 : 폐쇄망의 경우, yaml파일의 image 항목은 registry주소의 이미지를 사용해야 합니다. (${REGISTRY}/chartmuseum/chartmuseum:latest)
 - 비고 : GET서비스를 제외한, 차트를 업로드하거나 삭제하는 서비스는 허가 받은 계정만 사용 가능 합니다. 설정은 chartmuseum.yaml의 BASIC_AUTH_USER(id)/BASIC_AUTH_PASS(password)를 수정 하시면 됩니다.
 - 비고 : PersistentVolumeClaim의 storage크기는 사용자에 맞게 설정 해야 합니다. (default: 10G)
